@@ -2,7 +2,7 @@
 menu = """
 [d] Depositar
 [s] Sacar
-[e] Extrato
+[e] Mostrar extrato
 [c] Cadastrar usuário
 [b] Cadastrar conta bancária
 [q] Sair
@@ -61,7 +61,7 @@ def sacar(saldo=saldo, valor=valor, extrato=extrato, limite=limite, numero_saque
     return saldo, extrato, numero_saques
 
 
-def extrato(saldo, /, *, extrato):
+def mostrar_extrato(saldo, extrato):
     print("\n================ EXTRATO ================")
     print("Não foram realizadas movimentações." if not extrato else extrato)
     print(f"\nSaldo: R$ {saldo:.2f}")
@@ -103,6 +103,22 @@ def cadastrarContas():
     })
     print("Conta criada com sucesso!")
 
+def listarContas():
+    if not contas_bancarias:
+        print("Nenhuma conta cadastrada.")
+        return
+
+    for conta in contas_bancarias:
+        print(f"Agência: {conta['Agência']}, Número da conta: {conta['Número da conta']}, Titular: {conta['Titular']}")
+
+def listarUsuarios():
+    if not cpfs:
+        print("Nenhum usuário cadastrado.")
+        return
+
+    for i in range(len(cpfs)):
+        print(f"Nome: {nomes[i]}, CPF: {cpfs[i]}, Data de Nascimento: {datas_nascimento[i]}, Endereço: {enderecos[i]}")
+
 
 while True:
 
@@ -117,7 +133,11 @@ while True:
     elif opcao == "c":
         cadastrar()
     elif opcao == "b":
-        cadastrarContas()
+        cadastrarContas()  
+    elif opcao == "l":
+        listarContas()
+    elif opcao == "u":
+        listarUsuarios()
     elif opcao == "q":
         break
     else:
