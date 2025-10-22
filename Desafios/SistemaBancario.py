@@ -5,6 +5,8 @@ menu = """
 [e] Mostrar extrato
 [c] Cadastrar usuário
 [b] Cadastrar conta bancária
+[l] Listar contas
+[u] Listar usuários
 [q] Sair
 => """
 
@@ -22,7 +24,7 @@ enderecos = []
 contas_bancarias = []
 
 
-def depositar(saldo, valor, extrato):
+def depositar(saldo, valor, extrato, /):
     valor = float(input("Informe o valor do depósito: "))
     if valor > 0:
         saldo += valor
@@ -32,7 +34,7 @@ def depositar(saldo, valor, extrato):
     return saldo, extrato
 
 
-def sacar(saldo=saldo, valor=valor, extrato=extrato, limite=limite, numero_saques=numero_saques, LIMITE_SAQUES=LIMITE_SAQUES):
+def sacar( *,saldo, valor, extrato, limite, numero_saques, LIMITE_SAQUES):
     valor = float(input("Informe o valor do saque: "))
 
     excedeu_saldo = valor > saldo
@@ -61,7 +63,7 @@ def sacar(saldo=saldo, valor=valor, extrato=extrato, limite=limite, numero_saque
     return saldo, extrato, numero_saques
 
 
-def mostrar_extrato(saldo, extrato):
+def mostrar_extrato(saldo, /, *, extrato):
     print("\n================ EXTRATO ================")
     print("Não foram realizadas movimentações." if not extrato else extrato)
     print(f"\nSaldo: R$ {saldo:.2f}")
@@ -127,9 +129,9 @@ while True:
     if opcao == "d":
         saldo, extrato = depositar(saldo, valor, extrato)
     elif opcao == "s":
-        saldo, extrato, numero_saques = sacar(saldo, valor, extrato, limite, numero_saques, LIMITE_SAQUES)
+        saldo, extrato, numero_saques = sacar(saldo = saldo, valor = valor, extrato = extrato, limite = limite, numero_saques = numero_saques, LIMITE_SAQUES = LIMITE_SAQUES)
     elif opcao == "e":
-        mostrar_extrato(saldo, extrato)
+        mostrar_extrato(saldo, extrato = extrato)
     elif opcao == "c":
         cadastrar()
     elif opcao == "b":
