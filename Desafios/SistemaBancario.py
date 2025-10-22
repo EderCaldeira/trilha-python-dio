@@ -23,15 +23,13 @@ contas_bancarias = []
 
 def depositar(saldo, valor, extrato):
     valor = float(input("Informe o valor do depósito: "))
-
     if valor > 0:
         saldo += valor
-        extrato += f"Deposito: R$ {valor:.2f}\n"
-
-
+        extrato += f"Depósito: R$ {valor:.2f}\n"
     else:
         print("Operação falhou! O valor informado é inválido.")
     return saldo, extrato
+
 
 def sacar(saldo = saldo, valor = valor, extrato = extrato, limite = limite, numero_saques = numero_saques, LIMITE_SAQUES = LIMITE_SAQUES):
     valor = float(input("Informe o valor do saque: "))
@@ -103,21 +101,21 @@ def cadastrarContas():
 
 while True:
 
-        opcao = input(menu).strip().lower()
+    opcao = input(menu).strip().lower()
         
-        if opcao == "d":
-            depositar(saldo, valor, extrato)
-        elif opcao == "s":
-            sacar( valor, extrato, limite, numero_saques, LIMITE_SAQUES)
-        elif opcao == "e":
-            extrato(saldo, extrato)
-        elif opcao == "c":
-            cadastrar()
-        elif opcao == "b":
-            cadastrarContas()
-        elif opcao == "q":
-            break
-        else:
+    if opcao == "d":
+        depositar(saldo, valor, extrato)
+    elif opcao == "s":
+        sacar( valor, extrato, limite, numero_saques, LIMITE_SAQUES)
+    elif opcao == "e":
+        extrato(saldo, extrato)
+    elif opcao == "c":
+        cadastrar()
+    elif opcao == "b":
+        cadastrarContas()
+    elif opcao == "q":
+        break
+    else:
             print("Operação inválida, por favor selecione novamente a operação desejada.")
 
 
